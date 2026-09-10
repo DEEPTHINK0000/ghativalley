@@ -29,31 +29,50 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // render -----------------------
   useEffect(() => {
     const fetchDishes = async () => {
       try {
         const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+        console.log("API URL:", API_URL);
+
         if (!API_URL) {
-          throw new Error("NEXT_PUBLIC_API_URL is not configured");
+          throw new Error("NEXT_PUBLIC_API_URL is missing");
         }
 
-        const response = await fetch(`${API_URL}/api/dishes`);
+        const url = `${API_URL}/api/dishes`;
+
+        console.log("Fetching:", url);
+
+        const response = await fetch(url);
+
+        console.log("Status:", response.status);
+        console.log("OK:", response.ok);
+
+        const text = await response.text();
+
+        console.log("Response:", text);
 
         if (!response.ok) {
-          throw new Error(`API error: ${response.status}`);
+          throw new Error(`HTTP ${response.status}: ${text}`);
         }
 
-        const data: DishesResponse = await response.json();
+        const data: DishesResponse = JSON.parse(text);
+
+        console.log("Parsed data:", data);
 
         if (!data.success) {
-          throw new Error("API returned an error");
+          throw new Error("API returned success=false");
         }
 
         setMenu(data);
       } catch (error) {
-        console.error("Dishes API error:", error);
-        setError("Unable to load menu.");
+        console.error("DISH API ERROR:", error);
+
+        setError(
+          error instanceof Error ? error.message : "Unable to load menu."
+        );
       } finally {
         setLoading(false);
       }
@@ -62,11 +81,11 @@ export default function Home() {
     fetchDishes();
   }, []);
 
+  //// json        -------------------
   // useEffect(() => {
   //   const fetchDishes = async () => {
   //     try {
-  //       const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  //       const response = await fetch(`${API_URL}/api/dishes`);
+  //       const response = await fetch("http://localhost:5000/api/dishes");
 
   //       if (!response.ok) {
   //         throw new Error("Failed to fetch dishes");
