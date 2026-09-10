@@ -1,0 +1,518 @@
+{
+  "currency": "INR",
+  "currency_symbol": "₹",
+  "categories": [
+    {
+      "category_name": "Beverages",
+      "items": [
+        {
+          "name": "Strawberry Shake",
+          "price": 0,
+          "unit": "glass",
+          "description": "Creamy strawberry milkshake."
+        },
+        {
+          "name": "Butter Scotch Shake",
+          "price": 150,
+          "unit": "glass",
+          "description": "Rich butterscotch flavoured milkshake."
+        },
+        {
+          "name": "Cold Coffee",
+          "price": 150,
+          "unit": "glass",
+          "description": "Chilled creamy cold coffee."
+        },
+        {
+          "name": "Oreo Shake",
+          "price": 150,
+          "unit": "glass",
+          "description": "Creamy milkshake blended with Oreo cookies."
+        },
+        {
+          "name": "Kitkat Shake",
+          "price": 150,
+          "unit": "glass",
+          "description": "Chocolate milkshake blended with KitKat."
+        },
+        {
+          "name": "Badam Shake",
+          "price": 150,
+          "unit": "glass",
+          "description": "Rich almond milkshake."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Ice Creams",
+      "items": [
+        {
+          "name": "Strawberry Scoops",
+          "price": 80,
+          "unit": "2 scoops",
+          "description": "Two scoops of strawberry ice cream."
+        },
+        {
+          "name": "Vanilla Scoops",
+          "price": 80,
+          "unit": "2 scoops",
+          "description": "Two scoops of classic vanilla ice cream."
+        },
+        {
+          "name": "Butter Scotch Scoops",
+          "price": 80,
+          "unit": "2 scoops",
+          "description": "Two scoops of butterscotch ice cream."
+        },
+        {
+          "name": "Chocolate Scoops",
+          "price": 80,
+          "unit": "2 scoops",
+          "description": "Two scoops of chocolate ice cream."
+        },
+        {
+          "name": "Kesar Pista Scoops",
+          "price": 80,
+          "unit": "2 scoops",
+          "description": "Two scoops of kesar pista ice cream."
+        },
+        {
+          "name": "American Nut's",
+          "price": 80,
+          "unit": "2 scoops",
+          "description": "Two scoops of American nuts ice cream."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Soups",
+      "items": [
+        {
+          "name": "Tomato Soup",
+          "price": 99,
+          "unit": "bowl",
+          "description": "Classic creamy tomato soup."
+        },
+        {
+          "name": "Hot & Sour Soup",
+          "price": 80,
+          "unit": "bowl",
+          "description": "Spicy and tangy Indo-Chinese soup."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Pizza",
+      "items": [
+        {
+          "name": "Cheese Chicken Pizza",
+          "price": 250,
+          "unit": "pizza",
+          "description": "Chicken pizza topped with melted cheese."
+        },
+        {
+          "name": "Tandoori Chicken Pizza",
+          "price": 280,
+          "unit": "pizza",
+          "description": "Pizza topped with tandoori chicken and cheese."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Bar-Be-Que (Tandoori)",
+      "items": [
+        {
+          "name": "Tandoori Chicken",
+          "half_price": 230,
+          "full_price": 460,
+          "unit": "half/full",
+          "description": "Classic tandoori chicken marinated with Indian spices."
+        },
+        {
+          "name": "Afgani Chicken",
+          "half_price": 240,
+          "full_price": 480,
+          "unit": "half/full",
+          "description": "Creamy Afghani-style chicken preparation."
+        },
+        {
+          "name": "Mutton Seekh Kabab",
+          "price": 290,
+          "unit": "plate",
+          "description": "Minced mutton seekh kebabs grilled with aromatic spices."
+        },
+        {
+          "name": "Chicken Seekh Kabab",
+          "price": 240,
+          "unit": "plate",
+          "description": "Juicy minced chicken seekh kebabs."
+        },
+        {
+          "name": "Chicken Tikka",
+          "price": 240,
+          "unit": "plate",
+          "description": "Grilled chicken pieces marinated in Indian spices."
+        },
+        {
+          "name": "Haryali Chicken Tikka",
+          "price": 250,
+          "unit": "plate",
+          "description": "Chicken tikka prepared with fresh green herbs."
+        },
+        {
+          "name": "Afgani Chicken Tikka",
+          "price": 250,
+          "unit": "plate",
+          "description": "Creamy and mildly spiced Afghani chicken tikka."
+        },
+        {
+          "name": "Tangdi Kabab",
+          "price": 340,
+          "unit": "4 pcs",
+          "description": "Tender chicken leg kebabs marinated and grilled in tandoor."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Chicken Gravy",
+      "items": [
+        {
+          "name": "Chicken Kalimirch",
+          "half_price": 320,
+          "full_price": 640,
+          "unit": "half/full",
+          "description": "Chicken cooked in a creamy black pepper gravy."
+        },
+        {
+          "name": "Butter Chicken Boneless",
+          "half_price": 340,
+          "full_price": 680,
+          "unit": "half/full",
+          "description": "Boneless chicken in rich buttery tomato gravy."
+        },
+        {
+          "name": "Punjabi Chicken Masala",
+          "half_price": 330,
+          "full_price": 640,
+          "unit": "half/full",
+          "description": "Punjabi-style chicken cooked with aromatic spices."
+        },
+        {
+          "name": "Afgani Chicken Masala",
+          "half_price": 330,
+          "full_price": 650,
+          "unit": "half/full",
+          "description": "Creamy Afghani-style chicken curry."
+        },
+        {
+          "name": "Chicken Tikka Masala",
+          "price": 540,
+          "unit": "6 pcs",
+          "description": "Tandoori chicken tikka cooked in spiced masala gravy."
+        },
+        {
+          "name": "Handi Chicken",
+          "half_price": 330,
+          "full_price": 660,
+          "unit": "half/full",
+          "description": "Traditional handi-style chicken curry."
+        },
+        {
+          "name": "Kadai Chicken",
+          "half_price": 330,
+          "full_price": 660,
+          "unit": "half/full",
+          "description": "Chicken cooked with capsicum, onion and kadai spices."
+        },
+        {
+          "name": "Egg Curry",
+          "price": 220,
+          "unit": "3 eggs",
+          "description": "Boiled eggs cooked in Indian curry gravy."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Mutton Gravy",
+      "items": [
+        {
+          "name": "Mutton Curry",
+          "half_price": 310,
+          "full_price": 590,
+          "unit": "half/full",
+          "description": "Tender mutton cooked in traditional Indian curry."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Vegetarian Main Course",
+      "items": [
+        {
+          "name": "Paneer Takatak",
+          "price": 220,
+          "unit": "plate",
+          "description": "Paneer cooked in a rich spicy tomato-based gravy."
+        },
+        {
+          "name": "Paneer Dopyaza",
+          "price": 210,
+          "unit": "plate",
+          "description": "Paneer prepared with generous amounts of onion."
+        },
+        {
+          "name": "Shahi Paneer",
+          "price": 230,
+          "unit": "plate",
+          "variants": ["Red", "White"],
+          "description": "Royal-style paneer curry."
+        },
+        {
+          "name": "Malai Kofta",
+          "price": 240,
+          "unit": "plate",
+          "variants": ["Red", "White"],
+          "description": "Soft koftas served in rich creamy gravy."
+        },
+        {
+          "name": "Paneer Pasanda",
+          "price": 220,
+          "unit": "plate",
+          "description": "Stuffed paneer cooked in rich gravy."
+        },
+        {
+          "name": "Matar Mushroom",
+          "price": 200,
+          "unit": "plate",
+          "description": "Green peas and mushrooms cooked with Indian spices."
+        },
+        {
+          "name": "Cheese Tomato",
+          "price": 200,
+          "unit": "plate",
+          "description": "Tomato preparation finished with cheese."
+        },
+        {
+          "name": "Chana Masala",
+          "price": 160,
+          "unit": "plate",
+          "description": "Chickpeas cooked in aromatic masala gravy."
+        },
+        {
+          "name": "Dal Fry",
+          "price": 150,
+          "unit": "plate",
+          "description": "Yellow lentils tempered with Indian spices."
+        },
+        {
+          "name": "Dal Tadka",
+          "price": 160,
+          "unit": "plate",
+          "description": "Lentils finished with aromatic tadka."
+        },
+        {
+          "name": "Dal Makhani",
+          "price": 220,
+          "unit": "plate",
+          "description": "Creamy black lentils slow-cooked with spices."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Raita",
+      "items": [
+        {
+          "name": "Raita",
+          "price": 90,
+          "unit": "bowl",
+          "variants": [
+            "Mix Veg",
+            "Boondi",
+            "Mint",
+            "Fried",
+            "Pineapple",
+            "Onion"
+          ],
+          "description": "Refreshing yogurt-based accompaniment."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Breads",
+      "items": [
+        {
+          "name": "Aloo Parantha",
+          "price": 80,
+          "unit": "piece",
+          "description": "Indian flatbread stuffed with seasoned potato."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Rice & Biryani",
+      "items": [
+        {
+          "name": "Schezwan Chicken Rice",
+          "price": 180,
+          "unit": "plate",
+          "description": "Spicy Indo-Chinese rice with chicken."
+        },
+        {
+          "name": "Chicken Fried Rice",
+          "price": 200,
+          "unit": "plate",
+          "description": "Fried rice prepared with chicken and vegetables."
+        },
+        {
+          "name": "Egg Fried Rice",
+          "price": 160,
+          "unit": "plate",
+          "description": "Fried rice with egg and vegetables."
+        },
+        {
+          "name": "Fish Fried Rice",
+          "price": 210,
+          "unit": "plate",
+          "description": "Fried rice prepared with fish."
+        },
+        {
+          "name": "Hyderabadi Chicken Dum Biryani",
+          "price": 250,
+          "unit": "plate",
+          "description": "Aromatic Hyderabadi-style chicken dum biryani."
+        },
+        {
+          "name": "Mutton Biryani",
+          "price": 290,
+          "unit": "plate",
+          "description": "Fragrant basmati rice cooked with tender mutton."
+        },
+        {
+          "name": "Egg Biryani",
+          "price": 200,
+          "unit": "plate",
+          "description": "Aromatic biryani prepared with eggs."
+        },
+        {
+          "name": "Steamed Rice",
+          "price": 120,
+          "unit": "plate",
+          "description": "Plain steamed rice."
+        },
+        {
+          "name": "Jeera Rice",
+          "price": 130,
+          "unit": "plate",
+          "description": "Fragrant rice tempered with cumin."
+        },
+        {
+          "name": "Schezwan Rice",
+          "price": 160,
+          "unit": "plate",
+          "description": "Spicy Schezwan-style fried rice."
+        },
+        {
+          "name": "Paneer Fried Rice",
+          "price": 180,
+          "unit": "plate",
+          "description": "Fried rice prepared with paneer and vegetables."
+        },
+        {
+          "name": "Matar Pulao",
+          "price": 140,
+          "unit": "plate",
+          "description": "Fragrant rice cooked with green peas."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Salads & Extras",
+      "items": [
+        {
+          "name": "Papad",
+          "price": 20,
+          "unit": "piece",
+          "variants": ["Roasted", "Dry"],
+          "description": "Crispy Indian papad."
+        },
+        {
+          "name": "Masala Papad",
+          "price": 50,
+          "unit": "plate",
+          "description": "Crispy papad topped with fresh masala."
+        },
+        {
+          "name": "Green Salad",
+          "price": 60,
+          "unit": "plate",
+          "description": "Fresh seasonal vegetable salad."
+        },
+        {
+          "name": "Onion Salad",
+          "price": 40,
+          "unit": "plate",
+          "description": "Fresh sliced onion salad."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Desserts",
+      "items": [
+        {
+          "name": "Ice Cream",
+          "price": 80,
+          "unit": "serving",
+          "variants": [
+            "Vanilla",
+            "Strawberry",
+            "Chocolate",
+            "Butter Scotch",
+            "American Nuts"
+          ],
+          "description": "Choice of classic ice cream flavours."
+        },
+        {
+          "name": "Gulab Jamun",
+          "price": 80,
+          "unit": "2 pcs",
+          "description": "Soft traditional Indian sweet served warm."
+        },
+        {
+          "name": "Gulab Jamun with Ice Cream",
+          "price": 80,
+          "unit": "serving",
+          "description": "Warm gulab jamun served with ice cream."
+        }
+      ]
+    },
+
+    {
+      "category_name": "Thali",
+      "items": [
+        {
+          "name": "Chicken Thali",
+          "price": 270,
+          "unit": "thali",
+          "description": "Chicken Curry, Egg Curry, Steamed Rice, Roti, Naan, Salad, Plain Dahi"
+        },
+        {
+          "name": "Veg Thali",
+          "price": 240,
+          "unit": "thali",
+          "description": "Matar Paneer, Dal Fry, Jeera Rice, Curd, Butter Naan, Tandoori Butter Roti, Salad"
+        }
+      ]
+    }
+  ]
+}
