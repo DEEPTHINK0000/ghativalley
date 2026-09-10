@@ -32,10 +32,16 @@ export default function Home() {
   useEffect(() => {
     const fetchDishes = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/dishes");
+        const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+        if (!API_URL) {
+          throw new Error("NEXT_PUBLIC_API_URL is not configured");
+        }
+
+        const response = await fetch(`${API_URL}/api/dishes`);
 
         if (!response.ok) {
-          throw new Error("Failed to fetch dishes");
+          throw new Error(`API error: ${response.status}`);
         }
 
         const data: DishesResponse = await response.json();
@@ -46,7 +52,7 @@ export default function Home() {
 
         setMenu(data);
       } catch (error) {
-        console.error(error);
+        console.error("Dishes API error:", error);
         setError("Unable to load menu.");
       } finally {
         setLoading(false);
@@ -55,6 +61,34 @@ export default function Home() {
 
     fetchDishes();
   }, []);
+
+  // useEffect(() => {
+  //   const fetchDishes = async () => {
+  //     try {
+  //       const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  //       const response = await fetch(`${API_URL}/api/dishes`);
+
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch dishes");
+  //       }
+
+  //       const data: DishesResponse = await response.json();
+
+  //       if (!data.success) {
+  //         throw new Error("API returned an error");
+  //       }
+
+  //       setMenu(data);
+  //     } catch (error) {
+  //       console.error(error);
+  //       setError("Unable to load menu.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchDishes();
+  // }, []);
 
   if (loading) {
     return (
