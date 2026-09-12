@@ -34,17 +34,17 @@ export async function createUser(
   });
 }
 
-export async function updateUser(
-  id: number,
-  data: Record<string, unknown>,
-  token: string
-) {
-  return apiFetch(`/api/users/${id}`, {
-    method: PATCH,
-    token,
-    body: JSON.stringify(data),
-  });
-}
+// export async function updateUser(
+//   id: number,
+//   data: Record<string, unknown>,
+//   token: string
+// ) {
+//   return apiFetch(`/api/users/${id}`, {
+//     method: PATCH,
+//     token,
+//     body: JSON.stringify(data),
+//   });
+// }
 
 export async function deleteUser(
   id: number,
