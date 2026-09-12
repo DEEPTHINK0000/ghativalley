@@ -1,4 +1,3 @@
-
 const express = require("express");
 
 const {
@@ -10,16 +9,26 @@ const {
 
 const router = express.Router();
 
+
 // GET /api/dishes
 router.get("/", getAllDishes);
+
 
 // GET /api/dishes/search?q=chicken
 router.get("/search", searchDishes);
 
-// GET /api/dishes/category/:category
-router.get("/category/:category", getDishesByCategory);
 
-// GET /api/dishes/:category/:name
-router.get("/:category/:name", getDishByName);
+// GET /api/dishes/category/Beverages
+router.get(
+  "/category/:category",
+  getDishesByCategory
+);
+
+
+// GET /api/dishes/Chicken%20Gravy/Butter%20Chicken%20Boneless
+router.get(
+  "/:category/:name",
+  getDishByName
+);
 
 module.exports = router;

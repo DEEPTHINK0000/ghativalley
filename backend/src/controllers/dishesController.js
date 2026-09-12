@@ -1,54 +1,134 @@
+const fs = require("fs");
+const path = require("path");
 
-const dishes = require("../models/dishes.json");
+const dishesPath = path.join(
+  __dirname,
+  "../models/dishes.json"
+);
 
-/**
- * Get all dishes
- * GET /api/dishes
- */
-const getAllDishes = (req, res) => {
+function loadDishes() {
+  const file = fs.readFileSync(dishesPath, "utf-8");
+  return JSON.parse(file);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Normalize complete JSON menu
+|--------------------------------------------------------------------------
+|
+| Converts:
+|
+| category.items[]
+|
+| into a frontend-friendly structure:
+|
+| {
+|   id,
+|   name,
+|   category,
+|   price,
+|   half_price,
+|   full_price,
+|   unit,
+|   description,
+|   variants,
+|   available
+| }
+|
+*/
+
+function mapMenu(dishes) {
+  let id = 1;
+
+  return dishes.categories.flatMap((category) =>
+    category.items.map((item) => ({
+      id: id++,
+
+      name: item.name,
+
+      category: category.category_name,
+
+      price: item.price ?? null,
+
+      half_price: item.half_price ?? null,
+
+      full_price: item.full_price ?? null,
+
+      unit: item.unit ?? null,
+
+      description: item.description ?? "",
+
+      variants: item.variants ?? [],
+
+      available: true,
+    }))
+  );
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| GET ALL DISHES
+|--------------------------------------------------------------------------
+| GET /api/dishes
+|--------------------------------------------------------------------------
+*/
+
+function getAllDishes(req, res) {
   try {
+    const dishes = loadDishes();
+
+    const menu = mapMenu(dishes);
+
     res.status(200).json({
       success: true,
-      message: "Dishes fetched successfully",
 
       currency: dishes.currency,
+
       currency_symbol: dishes.currency_symbol,
 
       total_categories: dishes.categories.length,
 
-      total_items: dishes.categories.reduce(
-        (total, category) => total + category.items.length,
-        0
-      ),
+      total_dishes: menu.length,
 
       categories: dishes.categories,
+
+      menu,
     });
+
   } catch (error) {
+    console.error("Error loading dishes:", error);
+
     res.status(500).json({
       success: false,
-      message: "Failed to fetch dishes",
-      error: error.message,
+      message: "Unable to load dishes",
     });
   }
-};
+}
 
-/**
- * Get dish by category and item name
- * GET /api/dishes/:category/:name
- */
-const getDishByName = (req, res) => {
+
+/*
+|--------------------------------------------------------------------------
+| GET DISHES BY CATEGORY
+|--------------------------------------------------------------------------
+| GET /api/dishes/category/:category
+|--------------------------------------------------------------------------
+*/
+
+function getDishesByCategory(req, res) {
   try {
-    const categoryName = decodeURIComponent(
-      req.params.category
-    ).toLowerCase();
+    const dishes = loadDishes();
 
-    const dishName = decodeURIComponent(
-      req.params.name
-    ).toLowerCase();
+    const categoryName =
+      decodeURIComponent(req.params.category)
+        .trim()
+        .toLowerCase();
 
     const category = dishes.categories.find(
-      (category) =>
-        category.category_name.toLowerCase() === categoryName
+      (item) =>
+        item.category_name
+          .trim()
+          .toLowerCase() === categoryName
     );
 
     if (!category) {
@@ -58,138 +138,221 @@ const getDishByName = (req, res) => {
       });
     }
 
-    const dish = category.items.find(
-      (item) => item.name.toLowerCase() === dishName
+    let id = 1;
+
+    const items = category.items.map((item) => ({
+      id: id++,
+
+      name: item.name,
+
+      category: category.category_name,
+
+      price: item.price ?? null,
+
+      half_price: item.half_price ?? null,
+
+      full_price: item.full_price ?? null,
+
+      unit: item.unit ?? null,
+
+      description: item.description ?? "",
+
+      variants: item.variants ?? [],
+
+      available: true,
+    }));
+
+    res.status(200).json({
+      success: true,
+
+      currency: dishes.currency,
+
+      currency_symbol: dishes.currency_symbol,
+
+      category: category.category_name,
+
+      count: items.length,
+
+      items,
+    });
+
+  } catch (error) {
+    console.error(
+      "Error loading category:",
+      error
     );
 
-    if (!dish) {
+    res.status(500).json({
+      success: false,
+      message: "Unable to load category",
+    });
+  }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| GET SINGLE DISH
+|--------------------------------------------------------------------------
+| GET /api/dishes/:category/:name
+|--------------------------------------------------------------------------
+*/
+
+function getDishByName(req, res) {
+  try {
+    const dishes = loadDishes();
+
+    const categoryName =
+      decodeURIComponent(req.params.category)
+        .trim()
+        .toLowerCase();
+
+    const dishName =
+      decodeURIComponent(req.params.name)
+        .trim()
+        .toLowerCase();
+
+    const category = dishes.categories.find(
+      (item) =>
+        item.category_name
+          .trim()
+          .toLowerCase() === categoryName
+    );
+
+    if (!category) {
+      return res.status(404).json({
+        success: false,
+        message: "Category not found",
+      });
+    }
+
+    const item = category.items.find(
+      (dish) =>
+        dish.name
+          .trim()
+          .toLowerCase() === dishName
+    );
+
+    if (!item) {
       return res.status(404).json({
         success: false,
         message: "Dish not found",
       });
     }
 
-    res.status(200).json({
-      success: true,
-      currency: dishes.currency,
-      currency_symbol: dishes.currency_symbol,
+    const result = {
+      id: category.items.indexOf(item) + 1,
+
+      name: item.name,
 
       category: category.category_name,
 
-      data: dish,
+      price: item.price ?? null,
+
+      half_price: item.half_price ?? null,
+
+      full_price: item.full_price ?? null,
+
+      unit: item.unit ?? null,
+
+      description: item.description ?? "",
+
+      variants: item.variants ?? [],
+
+      available: true,
+    };
+
+    res.status(200).json({
+      success: true,
+
+      currency: dishes.currency,
+
+      currency_symbol: dishes.currency_symbol,
+
+      item: result,
     });
+
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch dish",
-      error: error.message,
-    });
-  }
-};
-
-/**
- * Get dishes by category
- * GET /api/dishes/category/:category
- */
-const getDishesByCategory = (req, res) => {
-  try {
-    const categoryName = decodeURIComponent(
-      req.params.category
-    ).toLowerCase();
-
-    const category = dishes.categories.find(
-      (category) =>
-        category.category_name.toLowerCase() === categoryName
+    console.error(
+      "Error loading dish:",
+      error
     );
 
-    if (!category) {
-      return res.status(404).json({
-        success: false,
-        message: "Category not found",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Category dishes fetched successfully",
-
-      currency: dishes.currency,
-      currency_symbol: dishes.currency_symbol,
-
-      category: category.category_name,
-
-      total: category.items.length,
-
-      data: category.items,
-    });
-  } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Failed to fetch category dishes",
-      error: error.message,
+      message: "Unable to load dish",
     });
   }
-};
+}
 
-/**
- * Search dishes
- * GET /api/dishes/search?q=chicken
- */
-const searchDishes = (req, res) => {
+
+/*
+|--------------------------------------------------------------------------
+| SEARCH DISHES
+|--------------------------------------------------------------------------
+| GET /api/dishes/search?q=chicken
+|--------------------------------------------------------------------------
+*/
+
+function searchDishes(req, res) {
   try {
-    const search = String(req.query.q || "")
+    const dishes = loadDishes();
+
+    const query = String(
+      req.query.q || ""
+    )
       .trim()
       .toLowerCase();
 
-    if (!search) {
+    if (!query) {
       return res.status(400).json({
         success: false,
         message: "Search query is required",
       });
     }
 
-    const results = [];
+    const menu = mapMenu(dishes);
 
-    dishes.categories.forEach((category) => {
-      category.items.forEach((item) => {
-        const nameMatch = item.name
-          .toLowerCase()
-          .includes(search);
+    const results = menu.filter((dish) => {
+      const searchText = [
+        dish.name,
+        dish.category,
+        dish.description,
+        ...dish.variants,
+      ]
+        .join(" ")
+        .toLowerCase();
 
-        const descriptionMatch = item.description
-          ?.toLowerCase()
-          .includes(search);
-
-        if (nameMatch || descriptionMatch) {
-          results.push({
-            category: category.category_name,
-            ...item,
-          });
-        }
-      });
+      return searchText.includes(query);
     });
 
     res.status(200).json({
       success: true,
-      message: "Search completed successfully",
 
       currency: dishes.currency,
+
       currency_symbol: dishes.currency_symbol,
 
-      search: search,
+      query,
 
-      total: results.length,
+      count: results.length,
 
-      data: results,
+      items: results,
     });
+
   } catch (error) {
+    console.error(
+      "Error searching dishes:",
+      error
+    );
+
     res.status(500).json({
       success: false,
-      message: "Failed to search dishes",
-      error: error.message,
+      message: "Unable to search dishes",
     });
   }
-};
+}
+
 
 module.exports = {
   getAllDishes,
@@ -197,4 +360,3 @@ module.exports = {
   getDishByName,
   searchDishes,
 };
-

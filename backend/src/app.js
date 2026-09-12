@@ -146,6 +146,10 @@ app.use(
   require("./routes/menuRoutes")
 );
 
+const dishesRoutes = require("./routes/dishesRoutes");
+
+app.use("/api/dishes", dishesRoutes);
+
 /*
    Optional legacy dishes route.
 
