@@ -30,10 +30,11 @@ export default function Home() {
   const [error, setError] = useState("");
 
   render -----------------------
+    const API_URL = "https://ghati-valley.onrender.com";
   useEffect(() => {
     const fetchDishes = async () => {
       try {
-        const API_URL = `https://ghati-valley.onrender.com/`;
+        // const API_URL = `https://ghati-valley.onrender.com/`;
 
         console.log("API URL:", API_URL);
 
